@@ -22,7 +22,7 @@ with open(train_txt) as f:
         lang = sp[1]
         if lang not in lang_files:
             lang_files[lang] = []
-        lang_files.append(sp[0])
+        lang_files[lang].append(sp[0])
 
 lang_dir = '../data/langs'
 if not isdir(lang_dir):
