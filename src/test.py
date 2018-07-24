@@ -33,10 +33,16 @@ with open(test_txt) as f:
         scores = []
         sum_scores = 0.0
         for l in langs:
-            sc = float(check_output(["bash", "test.sh", l, testfile]))
-            scores.append(sc)
-            sum_scores += sc
+	    res = check_output(["bash", "test.sh", l, testfile])
+	    try:
+		    sc = float(res)
+		    scores.append(sc)
+		    sum_scores += sc
+	    except:
+		    continue
 
+	if len(scores) < 1:
+		continue
         scores = [1.0 - (s/sum_scores) for s in scores]
         index, value = max(enumerate(scores), key=operator.itemgetter(1))
 
